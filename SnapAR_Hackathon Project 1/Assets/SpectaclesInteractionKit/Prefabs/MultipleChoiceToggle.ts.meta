@@ -26,6 +26,7 @@
   ScriptInputsHidden:
     LatRaise: false
     SquatShow: false
+    biPanel: false
     bicepPanel: false
     myToggles: false
     shoulderPressPanel: false
@@ -40,12 +41,14 @@
       LatRaise: !<reference.SceneObject> 00000000-0000-0000-0000-000000000000
       shoulderPressPanel: !<reference.SceneObject> 00000000-0000-0000-0000-000000000000
       SquatShow: !<reference.SceneObject> 00000000-0000-0000-0000-000000000000
+      biPanel: !<reference.SceneObject> 00000000-0000-0000-0000-000000000000
   ScriptTypes:
     -
       {}
   InputLines:
     - "// @input SceneObject[] myToggles"
     - // @input SceneObject squadPanel
+    - // @input SceneObject biPanel
     - // @input SceneObject bicepPanel
     - // @input SceneObject LatRaise
     - // @input SceneObject shoulderPressPanel

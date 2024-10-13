@@ -1,21 +1,18 @@
-import { ToggleButton } from 'SpectaclesInteractionKit/Components/UI/ToggleButton/ToggleButton';
+import { SIK } from "SpectaclesInteractionKit/SIK";
 
 @component
-export class CamPos extends BaseScriptComponent {
-    @input
-    cameraReference: SceneObject;
-
+export class BicepRepCounter extends BaseScriptComponent {
     @input
     textObject: SceneObject;
 
     @input
-    timerObject: SceneObject;
+    private textComponent: Text3D;
+    
+    @input
+    private timerComponent: Text3D;
 
     @input
-    scoreObject: SceneObject;
-
-    @input
-    squadPanel: SceneObject; // Reference to the squad panel
+    private scoreComponent: Text3D;
 
     private repCounter: number = 0;
     private setCounter: number = 0;
@@ -25,25 +22,24 @@ export class CamPos extends BaseScriptComponent {
     private updateInterval: number = 0.1;
     private isMovingUp: boolean = false;
 
-    private textComponent: Text3D;
-    private timerComponent: Text3D;
-    private scoreComponent: Text3D;
+
 
     private isTimerRunning: boolean = false;
     private timerStartTime: number = 0;
     private timerDuration: number = 15;
 
     private isWorkoutComplete: boolean = false;
-    private isCountingEnabled: boolean = false; // Start with counting disabled
     private isSetStarted: boolean = false;
 
-    onAwake() {
-        print("SquatCounter script initialized");
-        this.createEvent("UpdateEvent").bind(() => this.update());
+    private handInputData = SIK.HandInputData;
+    private rightHand: any;
+    private leftHand: any;
 
-        this.textComponent = this.textObject.getComponent("Component.Text3D") as Text3D;
-        this.timerComponent = this.timerObject.getComponent("Component.Text3D") as Text3D;
-        this.scoreComponent = this.scoreObject.getComponent("Component.Text3D") as Text3D;
+    onAwake() {
+        print("BicepRepCounter script initialized");
+        this.createEvent("UpdateEvent").bind(() => this.update());
+        this.textComponent.text = "Start bicep curls!";
+        // this.textComponent = this.textObject.getComponent("Component.Text3D") as Text3D;
 
         if (!this.textComponent || !this.timerComponent || !this.scoreComponent) {
             print("Error: Required component not found on the specified object(s)");
@@ -51,37 +47,21 @@ export class CamPos extends BaseScriptComponent {
             this.updateDisplay();
         }
 
-        this.setupSquadPanelVisibilityListener();
         this.showInitialInstruction();
-    }
 
-    setupSquadPanelVisibilityListener() {
-        if (this.squadPanel) {
-            // Create an UpdateEvent to check panel visibility each frame
-            this.createEvent("UpdateEvent").bind(() => {
-                const isVisible = this.squadPanel.enabled;
-                if (this.isCountingEnabled !== isVisible) {
-                    this.isCountingEnabled = isVisible;
-                    print(`Squat counting ${this.isCountingEnabled ? 'enabled' : 'disabled'}`);
-                    if (this.isCountingEnabled) {
-                        this.showInitialInstruction();
-                    }
-                }
-            });
-        } else {
-            print("Squad panel is not set!");
-        }
+        this.rightHand = this.handInputData.getHand("right");
+        this.leftHand = this.handInputData.getHand("left");
     }
 
     showInitialInstruction() {
         if (this.textComponent) {
-            this.textComponent.text = "Squat now!";
+            this.textComponent.text = "Start bicep curls!";
         }
         this.isSetStarted = false;
     }
 
     update() {
-        if (!this.isWorkoutComplete && this.isCountingEnabled) {
+        if (!this.isWorkoutComplete) {
             this.updatePosition();
             if (!this.isSetStarted && this.repCounter === 0) {
                 this.showInitialInstruction();
@@ -100,13 +80,13 @@ export class CamPos extends BaseScriptComponent {
 
         this.lastUpdateTime = currentTime;
 
-        let cameraYPos = this.cameraReference.getTransform().getWorldPosition().y;
-        // print(cameraYPos);
+        const rightHandPos = this.rightHand.indexTip.position;
+        const leftHandPos = this.leftHand.indexTip.position;
 
-        this.detectSquat(cameraYPos);
+        this.detectBicepCurl(Math.max(rightHandPos.y, leftHandPos.y));
     }
 
-    detectSquat(currentPosition: number) {
+    detectBicepCurl(currentPosition: number) {
         if (this.lastPosition === null) {
             this.lastPosition = currentPosition;
             return;
@@ -114,16 +94,16 @@ export class CamPos extends BaseScriptComponent {
 
         const threshold = 10;
 
-        if (currentPosition > this.lastPosition + threshold) {
+        if (currentPosition > this.lastPosition + threshold) {[]
             // Moving up
             if (!this.isMovingUp && !this.isTimerRunning) {
                 this.isMovingUp = true;
                 this.repCounter++;
                 this.isSetStarted = true;
-                print(`Squat Count: ${this.repCounter}`);
+                print(`Bicep Curl Count: ${this.repCounter}`);
                 this.updateDisplay();
 
-                if (this.repCounter === 8) {
+                if (this.repCounter === 10) {
                     this.completeSet();
                 }
             }
@@ -185,7 +165,7 @@ export class CamPos extends BaseScriptComponent {
             } else if (this.isTimerRunning) {
                 // Don't update text during cooldown, it's handled in updateTimer
             } else if (!this.isSetStarted) {
-                this.textComponent.text = "Squat now!";
+                this.textComponent.text = "Curl Now!";
             } else {
                 this.textComponent.text = `Reps: ${this.repCounter}/8\nSets: ${this.setCounter}/3`;
             }

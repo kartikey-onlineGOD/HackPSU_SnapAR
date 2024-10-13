@@ -1,0 +1,45 @@
+- !<AssetImportMetadata/784fcd88-1f52-41ae-aaa8-8b2c9ca29a15>
+  ImportedAssetIds:
+    TypeScriptAsset: !<reference> 991578af-81ae-439e-9b93-422750e75f27
+  ImporterName: TypeScriptAssetImporter
+  PrimaryAsset: !<reference> 991578af-81ae-439e-9b93-422750e75f27
+  PackageType: NotAPackage
+  PackagePolicy: CannotBeUnpacked
+  AssetDataMap:
+    TypeScriptAsset: !<own> 38253101-220d-48be-83bf-bd9092d4843c
+  DependentFiles:
+    []
+  ImporterSettings: !<AssetImporterSettings/a3ef04f5-8955-4d7e-9df1-850608b24f6a>
+    {}
+  CompressionSettings: !<own> 00000000-0000-0000-0000-000000000000
+- !<TypeScriptAssetData/38253101-220d-48be-83bf-bd9092d4843c>
+  SvgIcon: ""
+  Description: ""
+  InternalVersion: 0
+  VersionMajor: 0
+  VersionMinor: 0
+  VersionPatch: 0
+  ComponentUid: 00000000-0000-0000-0000-000000000000
+  ExportUid: 00000000-0000-0000-0000-000000000000
+  CurrentVisibility: Editable
+  MaxVisibility: Editable
+  ScriptInputsHidden:
+    scoreComponent: false
+    textComponent: false
+    textObject: false
+    timerComponent: false
+  ScriptTypesHidden:
+    {}
+  DefaultScriptInputs:
+    - textObject: !<reference.SceneObject> 00000000-0000-0000-0000-000000000000
+      textComponent: !<reference.Text3D> 00000000-0000-0000-0000-000000000000
+      timerComponent: !<reference.Text3D> 00000000-0000-0000-0000-000000000000
+      scoreComponent: !<reference.Text3D> 00000000-0000-0000-0000-000000000000
+  ScriptTypes:
+    -
+      {}
+  InputLines:
+    - // @input SceneObject textObject
+    - // @input Component.Text3D textComponent
+    - // @input Component.Text3D timerComponent
+    - // @input Component.Text3D scoreComponent

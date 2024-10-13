@@ -9,6 +9,9 @@ export class MultipleChoiceToggle extends BaseScriptComponent {
     squadPanel: SceneObject;
 
     @input
+    biPanel: SceneObject;
+
+    @input
     bicepPanel: SceneObject;
 
     @input 
@@ -75,6 +78,7 @@ export class MultipleChoiceToggle extends BaseScriptComponent {
         }
         if (this.bicepPanel) {
             this.bicepPanel.enabled = false;
+            this.biPanel.enabled = false;
         }
         if (this.LatRaise) {
             this.LatRaise.enabled = false;
@@ -122,6 +126,7 @@ export class MultipleChoiceToggle extends BaseScriptComponent {
     updateBicepPanelVisibility(isVisible: boolean) {
         if (this.bicepPanel) {
             this.bicepPanel.enabled = isVisible;
+            this.biPanel.enabled = isVisible;
             print(`Bicep panel is now ${isVisible ? 'visible' : 'hidden'}`);
         } else {
             print("Bicep panel is not set!");

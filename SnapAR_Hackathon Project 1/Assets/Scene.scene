@@ -5,11 +5,8 @@
     - !<own> 0005641c-028d-459a-0000-000000014b4d
     - !<own> 597f6fa4-23e5-4230-9e74-1ece142cd000
     - !<own> dd7f3611-588e-4413-9805-05918062acec
-    - !<own> 44109e81-26a6-4cae-b5cd-172bcf1633d1
     - !<own> 6b5bac65-066f-4bc6-9149-662a81c00f38
-    - !<own> 34a49d0e-48b9-4405-93e0-ccab019986a4
-    - !<own> d9e7b4a6-550d-456f-a4cb-efbc93e0c7ff
-    - !<own> afd63037-ae78-4b7e-894d-fd02a8b970ae
+    - !<own> 045a63d8-3cb6-4bf2-9c5a-10d0d0e1093b
   layers: !<Layers/267ee9a7-aff2-4f9d-9a49-f71214747d03>
     userLayers:
       []
@@ -457,6 +454,24 @@
   BodySettingValue: 1.000000
   Damping: 0.000000
   AngularDamping: 0.000000
+- !<SceneObject/045a63d8-3cb6-4bf2-9c5a-10d0d0e1093b>
+  PrefabRemaps:
+    []
+  Name: Exsercise Container
+  Enabled: true
+  Layers: 1
+  LocalTransform:
+    position: {x: 34.794144, y: 0.000000, z: -17.916153}
+    rotation: {x: 0.000000, y: -45.000000, z: 0.000000}
+    scale: {x: 1.000000, y: 1.000000, z: 1.000000}
+    hasSegmentScaleCompensation: false
+  Children:
+    - !<own> 44109e81-26a6-4cae-b5cd-172bcf1633d1
+    - !<own> 34a49d0e-48b9-4405-93e0-ccab019986a4
+    - !<own> d9e7b4a6-550d-456f-a4cb-efbc93e0c7ff
+    - !<own> afd63037-ae78-4b7e-894d-fd02a8b970ae
+  Components:
+    []
 - !<ScriptComponent/046ce277-7b89-4ec4-9bfe-3c06bcf5610d>
   PrefabRemaps:
     []
@@ -3103,11 +3118,11 @@
   PrefabRemaps:
     []
   Name: Squat Counter
-  Enabled: true
+  Enabled: false
   Layers: 1
   LocalTransform:
     position: {x: 100.000000, y: 0.000000, z: -150.000000}
-    rotation: {x: 0.000000, y: 0.000000, z: -0.000000}
+    rotation: {x: 0.000000, y: -45.000000, z: -0.000000}
     scale: {x: 1.000000, y: 1.000000, z: 1.000000}
     hasSegmentScaleCompensation: false
   Children:
@@ -7462,8 +7477,8 @@
   Enabled: true
   Layers: 1
   LocalTransform:
-    position: {x: -0.000000, y: 0.620426, z: -0.096510}
-    rotation: {x: -8.841763, y: -0.000000, z: -0.000000}
+    position: {x: 0.000000, y: 0.528871, z: -0.096510}
+    rotation: {x: -8.841715, y: 0.000000, z: 0.000000}
     scale: {x: 1.000000, y: 1.000000, z: 1.000000}
     hasSegmentScaleCompensation: false
   Children:
@@ -10648,8 +10663,8 @@
   Enabled: true
   Layers: 1
   LocalTransform:
-    position: {x: 80.000000, y: 0.000000, z: -10.000000}
-    rotation: {x: 0.000000, y: -90.000000, z: 0.000000}
+    position: {x: 65.000000, y: 16.697937, z: -106.833504}
+    rotation: {x: 0.000000, y: -45.000000, z: 0.000000}
     scale: {x: 1.000000, y: 1.000000, z: 1.000000}
     hasSegmentScaleCompensation: false
   Children:

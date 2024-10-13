@@ -24,19 +24,7 @@ export class MultipleChoiceToggle extends BaseScriptComponent {
 
     onAwake() {
         this.setupToggleButtons();
-        if (this.squadPanel) {
-            this.squadPanel.enabled = false;
-            this.SquatShow.enabled = false // Hide squad panel on start
-        }
-        if (this.bicepPanel) {
-            this.bicepPanel.enabled = false; // Hide bicep panel on start
-        }
-        if (this.LatRaise) {
-            this.LatRaise.enabled = false; // Hide lat raise panel on start
-        }
-        if (this.shoulderPressPanel) {
-            this.shoulderPressPanel.enabled = false; // Hide shoulder press panel on start
-        }
+        this.hideAllPanels();
     }
 
     setupToggleButtons() {
@@ -58,28 +46,59 @@ export class MultipleChoiceToggle extends BaseScriptComponent {
     handleButtonToggle(toggledIndex: number, isOn: boolean) {
         this.isUpdating = true;
 
-        this.myToggles.forEach((element, index) => {
+        // First, turn off all toggles and hide all panels
+        this.hideAllPanels();
+        this.myToggles.forEach((element) => {
             let toggleButton = element.getComponent(ToggleButton.getTypeName());
             if (toggleButton) {
-                if (index === toggledIndex) {
-                    toggleButton.isToggledOn = isOn;
-                    if (index === 0) {
-                        this.updateBicepPanelVisibility(isOn);
-                    } else if (index === 1) {
-                        this.updateShoulderPressPanelVisibility(isOn); // New condition for shoulder press
-                    } else if (index === 2) {
-                        this.updateSquadPanelVisibility(isOn);
-                    } else if (index === 3) {
-                        this.updateLatRaiseVisibility(isOn);
-                    }
-                } else if (isOn) {
-                    toggleButton.isToggledOn = false;
-                }
+                toggleButton.isToggledOn = false;
             }
         });
 
+        // Then, turn on the selected toggle and show its panel
+        if (isOn) {
+            let selectedToggle = this.myToggles[toggledIndex].getComponent(ToggleButton.getTypeName());
+            if (selectedToggle) {
+                selectedToggle.isToggledOn = true;
+                this.showSelectedPanel(toggledIndex);
+            }
+        }
+
         this.logButtonStates();
         this.isUpdating = false;
+    }
+
+    hideAllPanels() {
+        if (this.squadPanel) {
+            this.squadPanel.enabled = false;
+            this.SquatShow.enabled = false;
+        }
+        if (this.bicepPanel) {
+            this.bicepPanel.enabled = false;
+        }
+        if (this.LatRaise) {
+            this.LatRaise.enabled = false;
+        }
+        if (this.shoulderPressPanel) {
+            this.shoulderPressPanel.enabled = false;
+        }
+    }
+
+    showSelectedPanel(index: number) {
+        switch(index) {
+            case 0:
+                this.updateBicepPanelVisibility(true);
+                break;
+            case 1:
+                this.updateShoulderPressPanelVisibility(true);
+                break;
+            case 2:
+                this.updateSquadPanelVisibility(true);
+                break;
+            case 3:
+                this.updateLatRaiseVisibility(true);
+                break;
+        }
     }
 
     logButtonStates() {

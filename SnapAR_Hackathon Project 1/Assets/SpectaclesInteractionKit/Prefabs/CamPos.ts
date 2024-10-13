@@ -35,6 +35,7 @@ export class CamPos extends BaseScriptComponent {
 
     private isWorkoutComplete: boolean = false;
     private isCountingEnabled: boolean = false; // Start with counting disabled
+    private isSetStarted: boolean = false;
 
     onAwake() {
         print("SquatCounter script initialized");
@@ -51,6 +52,7 @@ export class CamPos extends BaseScriptComponent {
         }
 
         this.setupSquadPanelVisibilityListener();
+        this.showInitialInstruction();
     }
 
     setupSquadPanelVisibilityListener() {
@@ -61,6 +63,9 @@ export class CamPos extends BaseScriptComponent {
                 if (this.isCountingEnabled !== isVisible) {
                     this.isCountingEnabled = isVisible;
                     print(`Squat counting ${this.isCountingEnabled ? 'enabled' : 'disabled'}`);
+                    if (this.isCountingEnabled) {
+                        this.showInitialInstruction();
+                    }
                 }
             });
         } else {
@@ -68,9 +73,19 @@ export class CamPos extends BaseScriptComponent {
         }
     }
 
+    showInitialInstruction() {
+        if (this.textComponent) {
+            this.textComponent.text = "Squat now!";
+        }
+        this.isSetStarted = false;
+    }
+
     update() {
         if (!this.isWorkoutComplete && this.isCountingEnabled) {
             this.updatePosition();
+            if (!this.isSetStarted && this.repCounter === 0) {
+                this.showInitialInstruction();
+            }
         }
         if (this.isTimerRunning) {
             this.updateTimer();
@@ -104,6 +119,7 @@ export class CamPos extends BaseScriptComponent {
             if (!this.isMovingUp && !this.isTimerRunning) {
                 this.isMovingUp = true;
                 this.repCounter++;
+                this.isSetStarted = true;
                 print(`Squat Count: ${this.repCounter}`);
                 this.updateDisplay();
 
@@ -138,13 +154,14 @@ export class CamPos extends BaseScriptComponent {
         this.isWorkoutComplete = true;
         print(`Workout completed! Final Score: ${this.score}`);
         this.updateDisplay();
-        this.textComponent.text = "Workout complete!";
-        this.timerComponent.text = "";
     }
 
     startTimer() {
         this.isTimerRunning = true;
         this.timerStartTime = getTime();
+        if (this.textComponent) {
+            this.textComponent.text = "Cooldown";
+        }
     }
 
     updateTimer() {
@@ -153,10 +170,11 @@ export class CamPos extends BaseScriptComponent {
         const remainingTime = Math.max(0, this.timerDuration - elapsedTime);
 
         if (remainingTime > 0) {
-            this.timerComponent.text = remainingTime.toFixed(1);
+            this.timerComponent.text = `Rest: ${remainingTime.toFixed(1)}`;
         } else {
             this.isTimerRunning = false;
             this.timerComponent.text = "GO!";
+            this.showInitialInstruction();
         }
     }
 
@@ -164,6 +182,10 @@ export class CamPos extends BaseScriptComponent {
         if (this.textComponent) {
             if (this.isWorkoutComplete) {
                 this.textComponent.text = "Workout complete!";
+            } else if (this.isTimerRunning) {
+                // Don't update text during cooldown, it's handled in updateTimer
+            } else if (!this.isSetStarted) {
+                this.textComponent.text = "Squat now!";
             } else {
                 this.textComponent.text = `Reps: ${this.repCounter}/8\nSets: ${this.setCounter}/3`;
             }

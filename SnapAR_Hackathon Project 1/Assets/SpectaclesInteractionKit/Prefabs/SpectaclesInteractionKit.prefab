@@ -154,7 +154,7 @@
   MeshShadowMode: None
   ShadowColor: {x: 1.000000, y: 1.000000, z: 1.000000, w: 1.000000}
   ShadowDensity: 1.000000
-  Text: Look Right once you select your excersice  to see a demo <--
+  Text: Look Left once you select your excercise to see a demo <--
   Editable: false
   ShowEditingPreview: true
   TouchHandler: !<reference> 00000000-0000-0000-0000-000000000000
@@ -800,7 +800,7 @@
   PrefabRemaps:
     []
   Name: Bicep Counter
-  Enabled: true
+  Enabled: false
   Layers: 1
   LocalTransform:
     position: {x: 100.000000, y: 0.000000, z: -150.000000}
@@ -1003,7 +1003,7 @@
   MeshShadowMode: None
   ShadowColor: {x: 1.000000, y: 1.000000, z: 1.000000, w: 1.000000}
   ShadowDensity: 1.000000
-  Text: Lateral Raises
+  Text: Bicep Curls
   Editable: false
   ShowEditingPreview: true
   TouchHandler: !<reference> 00000000-0000-0000-0000-000000000000
@@ -1532,7 +1532,7 @@
   MeshShadowMode: None
   ShadowColor: {x: 1.000000, y: 1.000000, z: 1.000000, w: 1.000000}
   ShadowDensity: 1.000000
-  Text: Lateral Raises
+  Text: Bicep Curls
   Editable: false
   ShowEditingPreview: true
   TouchHandler: !<reference> 00000000-0000-0000-0000-000000000000
@@ -2644,7 +2644,7 @@
 - !<SceneObject/681f3a8d-32fb-4454-97ce-293771bbd61f>
   PrefabRemaps:
     []
-  Name: Text3D
+  Name: Text3D-Bicep
   Enabled: true
   Layers: 1
   LocalTransform:
@@ -4581,7 +4581,7 @@
   PrefabRemaps:
     []
   Name: Squat Counter Screen
-  Enabled: false
+  Enabled: true
   Layers: 1
   LocalTransform:
     position: {x: 0.000000, y: 0.000000, z: 0.000000}
@@ -4938,13 +4938,15 @@
   ShadowDensity: 1.000000
   Materials:
     - !<reference> b7768f04-ce8d-4cc0-ad8e-e42117ca5223
-  Text: ""
+  Text: |
+    Score
+
   Editable: false
   ShowEditingPreview: true
   TouchHandler: !<reference> 00000000-0000-0000-0000-000000000000
   SizeToFit: false
-  FontSize: 400
-  ExtrusionDepth: 0.400000
+  FontSize: 150
+  ExtrusionDepth: 0.460000
   ExtrudeDirection: Both
   Font: !<reference> 00000000-0000-0000-0000-000000000000
   LayoutRect:
@@ -5341,7 +5343,7 @@
   MeshShadowMode: None
   ShadowColor: {x: 1.000000, y: 1.000000, z: 1.000000, w: 1.000000}
   ShadowDensity: 1.000000
-  Text: Look Left to select your  excersice for today ->
+  Text: Look Right to select your  excercise for today -->
   Editable: false
   ShowEditingPreview: true
   TouchHandler: !<reference> 00000000-0000-0000-0000-000000000000

@@ -1,7 +1,0 @@
-CollapsedEntities:
-  type: stringset
-  value:
-    size: 1
-    values:
-      - SpectaclesInteractionKit/package.native
-  options: 4
